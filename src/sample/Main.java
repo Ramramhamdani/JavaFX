@@ -10,13 +10,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+
+import java.util.ArrayList;
 
 public class Main extends Application {
 
@@ -24,13 +24,13 @@ public class Main extends Application {
     TextField userInput;
     PasswordField passwordField;
     Button loginButton;
-
+    Controller controller = new Controller();
 
     @Override
-    public void start(Stage window) throws Exception{
-        window.setHeight(200);
-        window.setWidth(350);
-        window.setTitle("Login screen");
+    public void start(Stage login) throws Exception{
+        login.setHeight(200);
+        login.setWidth(350);
+        login.setTitle("Login screen");
 
         VBox container = new VBox();
         userLabel = new Label("Username");
@@ -44,6 +44,7 @@ public class Main extends Application {
         passwordField = new PasswordField();
         passwordField.setPromptText("Password");
 
+        // live updated label for the password (addlistener: live update)
         StringProperty passwordFieldProperty = passwordField.textProperty();
         visiblePassword.textProperty().bind(passwordFieldProperty);
         passwordFieldProperty.addListener(new ChangeListener<String>() {
@@ -59,6 +60,26 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent actionEvent) {
                 //logic
+                ArrayList<Login> logins = controller.GetLoginService();
+                for (Login entry :
+                        logins) {
+                    String tempName = entry.getUsername();
+                    String tempPassword = entry.getPassword();
+                    if (((userInput.textProperty()).toString() == tempName) && (passwordField.textProperty()).toString() == tempPassword)
+                    {
+                        login.close();
+                        new Content();
+                    }
+                    else
+                    {
+                        //login.close();
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Alert");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Incorrect username or password");
+                        alert.showAndWait();
+                    }
+                }
             }
         });
 
@@ -77,8 +98,8 @@ public class Main extends Application {
         container.getChildren().addAll(gridPane,visiblePassword);
 
         Scene scene = new Scene(container);
-        window.setScene(scene);
-        window.show();
+        login.setScene(scene);
+        login.show();
     }
 
     private Boolean isValidPassword(String newValue)
