@@ -1,6 +1,6 @@
-package sample;
+package DAL;
 
-import javafx.beans.property.StringProperty;
+import Logic.Login;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,5 +1,8 @@
 package sample;
 
+import DAL.LoginDAO;
+import Logic.Login;
+
 import java.util.ArrayList;
 
 public class Controller {

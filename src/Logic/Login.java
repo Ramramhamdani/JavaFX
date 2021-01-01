@@ -1,6 +1,4 @@
-package sample;
-
-import javafx.beans.property.StringProperty;
+package Logic;
 
 public class Login {
     String Id;

@@ -6,14 +6,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import Logic.Login;
 
 
 import java.util.ArrayList;
@@ -68,7 +67,7 @@ public class Main extends Application {
                     if (((userInput.textProperty()).toString() == tempName) && (passwordField.textProperty()).toString() == tempPassword)
                     {
                         login.close();
-                        new Content();
+                        new Content(entry);
                     }
                     else
                     {
