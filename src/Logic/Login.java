@@ -15,7 +15,8 @@ public class Login {
         this.role = role;
     }
 
-
+    public Login() {
+    }
 
     public String getFullName() {
         return fullName;

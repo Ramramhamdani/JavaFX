@@ -16,14 +16,19 @@ public class LoginDAO {
         this.logins = new ArrayList<>();
         Path path = Paths.get("src/Database/login.csv");
         File src = new File(String.valueOf(path));
+        int count = 0;
         try {
             Scanner dbScanner = new Scanner(src);
-            while (dbScanner.hasNextLine())
-            {
+            while (dbScanner.hasNextLine()) {
+
                 String line = dbScanner.nextLine();
                 String[] lines = line.split(",");
-                Login login = new Login(lines[0],lines[2],lines[1],lines[3],lines[4]);
-                logins.add(login);
+                Login login = new Login(lines[0], lines[1], lines[2], lines[3], lines[4]);
+                if (count != 0)
+                {
+                    logins.add(login);
+                }
+                count++;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

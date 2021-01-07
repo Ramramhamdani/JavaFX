@@ -24,9 +24,11 @@ public class Main extends Application {
     PasswordField passwordField;
     Button loginButton;
     Controller controller = new Controller();
+    String username, password;
+    Login passLogin;
 
     @Override
-    public void start(Stage login) throws Exception{
+    public void start(Stage login) throws Exception {
         login.setHeight(200);
         login.setWidth(350);
         login.setTitle("Login screen");
@@ -59,18 +61,12 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent actionEvent) {
                 //logic
-                ArrayList<Login> logins = controller.GetLoginService();
-                for (Login entry :
-                        logins) {
-                    String tempName = entry.getUsername();
-                    String tempPassword = entry.getPassword();
-                    if (((userInput.textProperty()).toString() == tempName) && (passwordField.textProperty()).toString() == tempPassword)
-                    {
+                username = userInput.getText();
+                password = passwordField.getText();
+                    if (loginValidation(username, password)) {
                         login.close();
-                        new Content(entry);
-                    }
-                    else
-                    {
+                        new Content(passLogin);
+                    } else {
                         //login.close();
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Alert");
@@ -79,7 +75,6 @@ public class Main extends Application {
                         alert.showAndWait();
                     }
                 }
-            }
         });
 
         GridPane gridPane = new GridPane();
@@ -87,43 +82,55 @@ public class Main extends Application {
         gridPane.setVgap(10);
         gridPane.setHgap(8);
 
-        GridPane.setConstraints(userLabel, 0,0);
-        GridPane.setConstraints(passwordLabel,0,1);
-        GridPane.setConstraints(userInput,1,0);
-        GridPane.setConstraints(passwordField,1,1);
-        GridPane.setConstraints(loginButton,0,2);
+        GridPane.setConstraints(userLabel, 0, 0);
+        GridPane.setConstraints(passwordLabel, 0, 1);
+        GridPane.setConstraints(userInput, 1, 0);
+        GridPane.setConstraints(passwordField, 1, 1);
+        GridPane.setConstraints(loginButton, 0, 2);
 
-        gridPane.getChildren().addAll(userLabel,passwordLabel,userInput,passwordField,loginButton);
-        container.getChildren().addAll(gridPane,visiblePassword);
+        gridPane.getChildren().addAll(userLabel, passwordLabel, userInput, passwordField, loginButton);
+        container.getChildren().addAll(gridPane, visiblePassword);
 
         Scene scene = new Scene(container);
         login.setScene(scene);
         login.show();
     }
 
-    private Boolean isValidPassword(String newValue)
-    {
+    private Boolean isValidPassword(String newValue) {
         int letters = 0;
         int digits = 0;
         int others = 0;
 
-        for (char c : newValue.toCharArray())
-        {
-            if (c > 48 && c <58)
-            {
+        for (char c : newValue.toCharArray()) {
+            if (c > 48 && c < 58) {
                 digits += 1;
-            }
-            else if ((c > 64 && c < 91) || (c > 96 && c < 123))
-            {
+            } else if ((c > 64 && c < 91) || (c > 96 && c < 123)) {
                 letters += 1;
-            }
-            else
-            {
+            } else {
                 others += 1;
             }
         }
         return newValue.length() > 7 && (letters > 0 && digits > 0 && others > 0);
     }
+
+
+    private boolean loginValidation(String username, String password) {
+        boolean isValid = false;
+
+        ArrayList<Login> logins = controller.GetLoginService();
+        for (Login entry :
+                logins) {
+            if ((username.equals(entry.getUsername())) && (password.equals(entry.getPassword())))
+            {
+                isValid = true;
+                passLogin = entry;
+                return isValid;
+            }
+        }
+
+        return isValid;
+    }
+
 
 
     public static void main(String[] args) {

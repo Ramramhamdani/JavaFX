@@ -1,7 +1,7 @@
 package Logic;
 //ID, First name, Last name, City, Address, Phone number, Email
 public class Customer {
-    Integer ID;
+    String ID;
     String firstName;
     String lastName;
     String city;
@@ -9,7 +9,7 @@ public class Customer {
     String phone;
     String email;
 
-    public Customer(Integer ID, String firstName, String lastName, String city, String address, String phone, String email) {
+    public Customer(String ID, String firstName, String lastName, String city, String address, String phone, String email) {
         this.ID = ID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -19,11 +19,11 @@ public class Customer {
         this.email = email;
     }
 
-    public Integer getID() {
+    public String getID() {
         return ID;
     }
 
-    public void setID(Integer ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
