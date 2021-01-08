@@ -23,7 +23,7 @@ public class OrderDAO {
             {
                 String line = scanner.nextLine();
                 String[] columns = line.split(",");
-                Order order = new Order(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5], columns[6]);
+                Order order = new Order(columns[0], columns[1], columns[2], columns[3], columns[4], columns[5], columns[6], columns[7]);
                 if (count != 0) {
                     orders.add(order);
                 }

@@ -5,6 +5,8 @@ import Logic.Customer;
 import Logic.Login;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -18,31 +20,39 @@ import javafx.stage.StageStyle;
 import sample.Content;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Customers extends Stage {
-    TableView customerView;
+
 
     public Customers(String name, Login login) {
         this.setHeight(440);
-        this.setWidth(440);
+        this.setWidth(500);
         this.show();
         this.setTitle("Customers");
+
+        HBox container = new HBox();
 
         CustomerDAO customerDAO = new CustomerDAO();
         ArrayList<Customer> customers = customerDAO.getCustomers();
         ArrayList<Customer> foundCustomers = new ArrayList<>();
+        List<Character> characters = new ArrayList<>();
 
         for (Customer customer: customers)
         {
             String customerName = customer.getFirstName();
-            if (customerName == name)
+            if (customerName.equals(name))
             {
+                foundCustomers.add(customer);
+            }
+            else if (customerName.contains(name)){
                 foundCustomers.add(customer);
             }
         }
 
+        ObservableList<Customer> customersList = FXCollections.observableArrayList(foundCustomers);
 
-        customerView = new TableView();
+        TableView customerView = new TableView();
         TableColumn<Customer, String> firstNameColumn = new TableColumn<>("First Name");
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
 
@@ -63,24 +73,26 @@ public class Customers extends Stage {
 
         customerView.getColumns().addAll(firstNameColumn, lastName, streetColumn, cityColumn, phoneColumn, emailColumn);
         customerView.setPlaceholder(new Label("no rows to display"));
+        customerView.setItems(customersList);
+
+        container.getChildren().addAll(customerView);
 
 
-
-        HBox container = new HBox();
         Scene scene = new Scene(container);
         this.setScene(scene);
         this.show();
 
-        customerView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+        customerView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Customer>() {
             @Override
-            public void changed(ObservableValue observableValue, Object o, Object t1) {
-
+            public void changed(ObservableValue observableValue, Customer o, Customer t1) {
+                fillContent(login, t1);
             }
         });
 
     }
-
-    public Customers(StageStyle stageStyle) {
-        super(stageStyle);
+    public void fillContent(Login login, Customer customer)
+    {
+        new Content(login, customer);
+        close();
     }
 }

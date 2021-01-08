@@ -9,8 +9,9 @@ public class Order {
     String acoustic;
     String type;
     String price;
+    String customer_FK;
 
-    public Order(String ID, String quantity, String brand, String model, String acoustic, String type, String price) {
+    public Order(String ID, String quantity, String brand, String model, String acoustic, String type, String price, String customer_FK) {
         this.ID = ID;
         this.quantity = quantity;
         this.brand = brand;
@@ -18,6 +19,15 @@ public class Order {
         this.acoustic = acoustic;
         this.type = type;
         this.price = price;
+        this.customer_FK = customer_FK;
+    }
+
+    public String getCustomer_FK() {
+        return customer_FK;
+    }
+
+    public void setCustomer_FK(String customer_FK) {
+        this.customer_FK = customer_FK;
     }
 
     public String getID() {

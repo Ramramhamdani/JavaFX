@@ -23,12 +23,12 @@ public class Main extends Application {
     TextField userInput;
     PasswordField passwordField;
     Button loginButton;
-    Controller controller = new Controller();
     String username, password;
-    Login passLogin;
+
 
     @Override
     public void start(Stage login) throws Exception {
+        Login passLogin;
         login.setHeight(200);
         login.setWidth(350);
         login.setTitle("Login screen");
@@ -63,9 +63,9 @@ public class Main extends Application {
                 //logic
                 username = userInput.getText();
                 password = passwordField.getText();
-                    if (loginValidation(username, password)) {
+                    if (loginValidation(username, password) != null) {
                         login.close();
-                        new Content(passLogin);
+                        new Content(loginValidation(username, password));
                     } else {
                         //login.close();
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -114,23 +114,19 @@ public class Main extends Application {
     }
 
 
-    private boolean loginValidation(String username, String password) {
-        boolean isValid = false;
-
+    private Login loginValidation(String username, String password) {
+        Controller controller = new Controller();
         ArrayList<Login> logins = controller.GetLoginService();
-        for (Login entry :
-                logins) {
+        //Login entry = null;
+        for (Login entry : logins) {
             if ((username.equals(entry.getUsername())) && (password.equals(entry.getPassword())))
             {
-                isValid = true;
-                passLogin = entry;
-                return isValid;
+                return entry;
             }
         }
 
-        return isValid;
+        return null;
     }
-
 
 
     public static void main(String[] args) {

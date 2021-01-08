@@ -1,1 +1,1 @@
-ID, Quantity, Brand, Model, Acoustic, Type, Price
+ID, Quantity, Brand, Model, Acoustic, Type, Price, Customer_FK
