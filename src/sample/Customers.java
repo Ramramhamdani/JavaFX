@@ -3,6 +3,8 @@ package sample;
 import DAL.CustomerDAO;
 import Logic.Customer;
 import Logic.Login;
+import Logic.Order;
+import Logic.OrderItem;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -92,7 +94,8 @@ public class Customers extends Stage {
     }
     public void fillContent(Login login, Customer customer)
     {
-        new Content(login, customer);
+        ArrayList<OrderItem> orderItems = new ArrayList<>();
+        new Content(login, customer, orderItems);
         close();
     }
 }

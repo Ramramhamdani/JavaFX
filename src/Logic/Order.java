@@ -1,33 +1,25 @@
 package Logic;
 
 public class Order {
-    //Quantity, Brand, Model, Acoustic, Type, Price
+    //ID, Date, Customer Name, City, Phone, Email, count, Total
     String ID;
-    String quantity;
-    String brand;
-    String model;
-    String acoustic;
-    String type;
-    String price;
-    String customer_FK;
+    String date;
+    String customerName;
+    String city;
+    String phone;
+    String email;
+    String count;
+    String total;
 
-    public Order(String ID, String quantity, String brand, String model, String acoustic, String type, String price, String customer_FK) {
+    public Order(String ID, String date, String customerName, String city, String phone, String email, String count, String total) {
         this.ID = ID;
-        this.quantity = quantity;
-        this.brand = brand;
-        this.model = model;
-        this.acoustic = acoustic;
-        this.type = type;
-        this.price = price;
-        this.customer_FK = customer_FK;
-    }
-
-    public String getCustomer_FK() {
-        return customer_FK;
-    }
-
-    public void setCustomer_FK(String customer_FK) {
-        this.customer_FK = customer_FK;
+        this.date = date;
+        this.customerName = customerName;
+        this.city = city;
+        this.phone = phone;
+        this.email = email;
+        this.count = count;
+        this.total = total;
     }
 
     public String getID() {
@@ -38,51 +30,59 @@ public class Order {
         this.ID = ID;
     }
 
-    public String getQuantity() {
-        return quantity;
+    public String getDate() {
+        return date;
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public String getModel() {
-        return model;
+    public String getCity() {
+        return city;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getAcoustic() {
-        return acoustic;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setAcoustic(String acoustic) {
-        this.acoustic = acoustic;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getType() {
-        return type;
+    public String getEmail() {
+        return email;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPrice() {
-        return price;
+    public String getCount() {
+        return count;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setCount(String count) {
+        this.count = count;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
     }
 }
